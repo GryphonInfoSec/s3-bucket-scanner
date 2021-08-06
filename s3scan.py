@@ -14,7 +14,7 @@ def parse_xml(result, link):
             target = link + "/" + _.text
             _ = requests.head(target)
             if _.status_code == 200:
-                print target
+                print(target)
 
     # TO-DO: add better parse error handling
     # If there is a known exception it would be better to catch that exception
@@ -25,7 +25,7 @@ def parse_xml(result, link):
 def s3_scan(silent, bucket):
     """ Checks for open S3 buckets and returns content """
     if not silent:
-        print "scanning bucket: " + bucket
+        print("scanning bucket: " + bucket)
     link = "https://" + bucket + ".s3.amazonaws.com"
     try:
         _ = requests.head(link)
@@ -33,7 +33,7 @@ def s3_scan(silent, bucket):
             _ = requests.get(link)
             parse_xml(_.text, link)
     except requests.exceptions.RequestException as _:
-        print _
+        print(_)
 
 
 def main():
